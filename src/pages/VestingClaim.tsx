@@ -166,7 +166,7 @@ function VestingClaim(): ReactElement {
               <div className={styles.tokenBalanceHelpText}>
                 {t("vestingContract")}{" "}
                 <a
-                  href={`https://etherscan.io/address/${
+                  href={`https://polygonscan.com/address/${
                     vestingContract?.address ?? ""
                   }`}
                 >
