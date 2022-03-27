@@ -5,6 +5,8 @@ import {
   BTC_POOL_V2_NAME,
   D4_POOL_NAME,
   FRAX_ARB_USD_POOL_V2_NAME,
+  POLY_METAPOOL_NAME,
+  POLY_USD_POOL_V2_NAME,
   POOLS_MAP,
   PoolName,
   PoolTypes,
@@ -47,6 +49,7 @@ function Pools(): ReactElement | null {
   const [susdPoolV2Data, susdV2UserShareData] = usePoolData(
     SUSD_METAPOOL_V2_NAME,
   )
+  const [maiPoolData, maiUserShareData] = usePoolData(POLY_METAPOOL_NAME)
   const [tbtcPoolData, tbtcUserShareData] = usePoolData(TBTC_METAPOOL_NAME)
   const [tbtcPoolV2Data, tbtcV2UserShareData] = usePoolData(
     TBTC_METAPOOL_V2_NAME,
@@ -59,6 +62,9 @@ function Pools(): ReactElement | null {
   const [arbUsdPoolData, arbUsdUserShareData] = usePoolData(ARB_USD_POOL_NAME)
   const [fraxArbUsdPoolV2Data, fraxArbUsdV2UserShareData] = usePoolData(
     FRAX_ARB_USD_POOL_V2_NAME,
+  )
+  const [polyUsdPoolV2Data, polyUsdV2UserShareData] = usePoolData(
+    POLY_USD_POOL_V2_NAME,
   )
   const [currentModal, setCurrentModal] = useState<string | null>(null)
   const approveAndMigrate = useApproveAndMigrate()
@@ -142,6 +148,13 @@ function Pools(): ReactElement | null {
         userShareData: susdV2UserShareData,
         poolRoute: "/pools/munefrax",
       }
+    } else if (poolName === POLY_METAPOOL_NAME) {
+      return {
+        name: POLY_METAPOOL_NAME,
+        poolData: maiPoolData,
+        userShareData: maiUserShareData,
+        poolRoute: "/pools/munemai",
+      }
     } else if (poolName === TBTC_METAPOOL_NAME) {
       return {
         name: TBTC_METAPOOL_NAME,
@@ -183,6 +196,13 @@ function Pools(): ReactElement | null {
         poolData: fraxArbUsdPoolV2Data,
         userShareData: fraxArbUsdV2UserShareData,
         poolRoute: "/pools/muneusd",
+      }
+    } else if (poolName === POLY_USD_POOL_V2_NAME) {
+      return {
+        name: POLY_USD_POOL_V2_NAME,
+        poolData: polyUsdPoolV2Data,
+        userShareData: polyUsdV2UserShareData,
+        poolRoute: "/pools/muneusdv2",
       }
     } else {
       return {
