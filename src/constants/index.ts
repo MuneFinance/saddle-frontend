@@ -1053,6 +1053,7 @@ export function isMetaPool(poolName = ""): boolean {
     TBTC_METAPOOL_V2_NAME,
     WCUSD_METAPOOL_NAME,
     WCUSD_METAPOOL_V2_NAME,
+    POLY_METAPOOL_NAME,
   ]).has(poolName)
 }
 
