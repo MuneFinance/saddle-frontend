@@ -26,6 +26,7 @@ import susdLogo from "../assets/icons/susd.svg"
 import tbtcLogo from "../assets/icons/tbtc.svg"
 import usdcLogo from "../assets/icons/usdc.svg"
 import usdtLogo from "../assets/icons/usdt.svg"
+import ustLogo from "../assets/icons/ust.svg"
 import veth2Logo from "../assets/icons/veth2.svg"
 import walletconnectIcon from "../assets/icons/walletconnect.svg"
 import wbtcLogo from "../assets/icons/wbtc.svg"
@@ -50,6 +51,7 @@ export const ARB_USD_POOL_NAME = "MIM Pool"
 export const FRAX_ARB_USD_POOL_V2_NAME = "Mune USD pool"
 export const POLY_USD_POOL_V2_NAME = "Mune USD pool V2"
 export const POLY_METAPOOL_NAME = "Mai Metapool"
+export const POLY_USD4_POOL_NAME = "Mune USD4 pool"
 
 export type PoolName =
   | typeof BTC_POOL_NAME
@@ -69,6 +71,7 @@ export type PoolName =
   | typeof FRAX_ARB_USD_POOL_V2_NAME
   | typeof POLY_USD_POOL_V2_NAME
   | typeof POLY_METAPOOL_NAME
+  | typeof POLY_USD4_POOL_NAME
 
 export enum ChainId {
   POLYGON = 137,
@@ -257,6 +260,10 @@ export const POLY_USD_SWAP_V2_ADDRESSES = buildAddresses({
   [ChainId.MATICMUMBAI]: "0x457307f3390AB04F276FE1FAFe743EfF356ac85b",
 })
 
+export const POLY_USD4_SWAP_ADDRESSES = buildAddresses({
+  [ChainId.MATICMUMBAI]: "0x9E7935A616EC1b2A97098ecdd6dC7BE2ffFb3bbE",
+})
+
 export const RETROACTIVE_SDL_MERKLETREE_DATA = buildAddresses({
   [ChainId.HARDHAT]: "hardhat.json",
 })
@@ -302,6 +309,10 @@ export const FRAX_ARB_USD_SWAP_V2_TOKEN_CONTRACT_ADDRESSES = buildAddresses({
 
 export const POLY_USD_SWAP_V2_TOKEN_CONTRACT_ADDRESSES = buildAddresses({
   [ChainId.MATICMUMBAI]: "0x008734acD7dd86E4bc45f1961b35f0ED1d8639C9",
+})
+
+export const POLY_USD4_SWAP_TOKEN_CONTRACT_ADDRESSES = buildAddresses({
+  [ChainId.MATICMUMBAI]: "0xe2ffC1bAC978DA0B3f7EEE55d617836E71fCa151",
 })
 
 export const BTC_SWAP_TOKEN_CONTRACT_ADDRESSES = buildAddresses({
@@ -507,6 +518,19 @@ export const MAI = new Token(
   maiLogo,
 )
 
+const UST_CONTRACT_ADDRESSES = buildAddresses({
+  [ChainId.MATICMUMBAI]: "0x0B55a279409f0CaBd2801147a533B2438035cDC2",
+})
+
+export const UST = new Token(
+  UST_CONTRACT_ADDRESSES,
+  18,
+  "UST",
+  "terrausd",
+  "Terra USD",
+  ustLogo,
+)
+
 export const FRAX_ARB_USD_SWAP_V2_TOKEN = new Token(
   FRAX_ARB_USD_SWAP_V2_TOKEN_CONTRACT_ADDRESSES,
   18,
@@ -524,6 +548,17 @@ export const POLY_USD_SWAP_V2_TOKEN = new Token(
   "muneUSDV2",
   "muneusdv2",
   "Mune FRAX/USDC/USDT",
+  saddleLPTokenLogo,
+  false,
+  true,
+)
+
+export const POLY_USD4_SWAP_TOKEN = new Token(
+  POLY_USD4_SWAP_TOKEN_CONTRACT_ADDRESSES,
+  18,
+  "muneUSD4",
+  "muneusd4",
+  "Mune UST/FRAX/USDC/USDT",
   saddleLPTokenLogo,
   false,
   true,
@@ -658,6 +693,7 @@ export const MIM = new Token(
 export const FRAX_ARB_USD_POOL_V2_TOKENS = [DAI, USDC, USDT]
 export const STABLECOIN_POOL_TOKENS = [DAI, USDC, USDT]
 export const POLY_USD_POOL_V2_TOKENS = [FRAX, USDC, USDT]
+export const POLY_USD4_POOL_TOKENS = [UST, FRAX, USDC, USDT]
 export const SUSD_POOL_TOKENS = [FRAX, ...FRAX_ARB_USD_POOL_V2_TOKENS]
 export const SUSD_UNDERLYING_POOL_TOKENS = [FRAX, FRAX_ARB_USD_SWAP_V2_TOKEN]
 export const MAI_POOL_TOKENS = [MAI, ...POLY_USD_POOL_V2_TOKENS]
@@ -945,6 +981,16 @@ export const POOLS_MAP: PoolsMap = {
     isSynthetic: false,
     type: PoolTypes.USD,
     route: "muneusdv2",
+    rewardPids: buildPids({ [ChainId.MATICMUMBAI]: 1 }),
+  },
+  [POLY_USD4_POOL_NAME]: {
+    name: POLY_USD4_POOL_NAME,
+    addresses: POLY_USD4_SWAP_ADDRESSES,
+    lpToken: POLY_USD4_SWAP_TOKEN,
+    poolTokens: POLY_USD4_POOL_TOKENS,
+    isSynthetic: false,
+    type: PoolTypes.USD,
+    route: "muneusd4",
     rewardPids: buildPids({ [ChainId.MATICMUMBAI]: 1 }),
   },
   [SUSD_METAPOOL_V2_NAME]: {

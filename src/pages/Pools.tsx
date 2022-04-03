@@ -6,6 +6,7 @@ import {
   D4_POOL_NAME,
   FRAX_ARB_USD_POOL_V2_NAME,
   POLY_METAPOOL_NAME,
+  POLY_USD4_POOL_NAME,
   POLY_USD_POOL_V2_NAME,
   POOLS_MAP,
   PoolName,
@@ -63,6 +64,8 @@ function Pools(): ReactElement | null {
   const [fraxArbUsdPoolV2Data, fraxArbUsdV2UserShareData] = usePoolData(
     FRAX_ARB_USD_POOL_V2_NAME,
   )
+  const [polyUsd4PoolData, polyUsd4UserShareData] =
+    usePoolData(POLY_USD4_POOL_NAME)
   const [polyUsdPoolV2Data, polyUsdV2UserShareData] = usePoolData(
     POLY_USD_POOL_V2_NAME,
   )
@@ -203,6 +206,13 @@ function Pools(): ReactElement | null {
         poolData: polyUsdPoolV2Data,
         userShareData: polyUsdV2UserShareData,
         poolRoute: "/pools/muneusdv2",
+      }
+    } else if (poolName === POLY_USD4_POOL_NAME) {
+      return {
+        name: POLY_USD4_POOL_NAME,
+        poolData: polyUsd4PoolData,
+        userShareData: polyUsd4UserShareData,
+        poolRoute: "/pools/muneusd4",
       }
     } else {
       return {
